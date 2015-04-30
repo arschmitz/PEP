@@ -1,41 +1,41 @@
-import PointerMap from 'pointermap';
+import PointerMap from "pointermap";
 
 var CLONE_PROPS = [
   // MouseEvent
-  'bubbles',
-  'cancelable',
-  'view',
-  'detail',
-  'screenX',
-  'screenY',
-  'clientX',
-  'clientY',
-  'ctrlKey',
-  'altKey',
-  'shiftKey',
-  'metaKey',
-  'button',
-  'relatedTarget',
+  "bubbles",
+  "cancelable",
+  "view",
+  "detail",
+  "screenX",
+  "screenY",
+  "clientX",
+  "clientY",
+  "ctrlKey",
+  "altKey",
+  "shiftKey",
+  "metaKey",
+  "button",
+  "relatedTarget",
   // DOM Level 3
-  'buttons',
+  "buttons",
   // PointerEvent
-  'pointerId',
-  'width',
-  'height',
-  'pressure',
-  'tiltX',
-  'tiltY',
-  'pointerType',
-  'hwTimestamp',
-  'isPrimary',
+  "pointerId",
+  "width",
+  "height",
+  "pressure",
+  "tiltX",
+  "tiltY",
+  "pointerType",
+  "hwTimestamp",
+  "isPrimary",
   // event instance
-  'type',
-  'target',
-  'currentTarget',
-  'which',
-  'pageX',
-  'pageY',
-  'timeStamp'
+  "type",
+  "target",
+  "currentTarget",
+  "which",
+  "pageX",
+  "pageY",
+  "timeStamp"
 ];
 
 var CLONE_DEFAULTS = [
@@ -63,11 +63,11 @@ var CLONE_DEFAULTS = [
   0,
   0,
   0,
-  '',
+  "",
   0,
   false,
   // event instance
-  '',
+  "",
   null,
   null,
   0,
@@ -76,7 +76,7 @@ var CLONE_DEFAULTS = [
   0
 ];
 
-var HAS_SVG_INSTANCE = (typeof SVGElementInstance !== 'undefined');
+var HAS_SVG_INSTANCE = (typeof SVGElementInstance !== "undefined");
 
 /**
  * This module is for normalizing events. Mouse and Touch events will be
@@ -139,35 +139,35 @@ var dispatcher = {
   // EVENTS
   down: function(inEvent) {
     inEvent.bubbles = true;
-    this.fireEvent('pointerdown', inEvent);
+    this.fireEvent("pointerdown", inEvent);
   },
   move: function(inEvent) {
     inEvent.bubbles = true;
-    this.fireEvent('pointermove', inEvent);
+    this.fireEvent("pointermove", inEvent);
   },
   up: function(inEvent) {
     inEvent.bubbles = true;
-    this.fireEvent('pointerup', inEvent);
+    this.fireEvent("pointerup", inEvent);
   },
   enter: function(inEvent) {
     inEvent.bubbles = false;
-    this.fireEvent('pointerenter', inEvent);
+    this.fireEvent("pointerenter", inEvent);
   },
   leave: function(inEvent) {
     inEvent.bubbles = false;
-    this.fireEvent('pointerleave', inEvent);
+    this.fireEvent("pointerleave", inEvent);
   },
   over: function(inEvent) {
     inEvent.bubbles = true;
-    this.fireEvent('pointerover', inEvent);
+    this.fireEvent("pointerover", inEvent);
   },
   out: function(inEvent) {
     inEvent.bubbles = true;
-    this.fireEvent('pointerout', inEvent);
+    this.fireEvent("pointerout", inEvent);
   },
   cancel: function(inEvent) {
     inEvent.bubbles = true;
-    this.fireEvent('pointercancel', inEvent);
+    this.fireEvent("pointercancel", inEvent);
   },
   leaveOut: function(event) {
     this.out(event);
@@ -244,7 +244,7 @@ var dispatcher = {
    * Returns a snapshot of inEvent, with writable properties.
    *
    * @param {Event} inEvent An event that contains properties to copy.
-   * @return {Object} An object containing shallow copies of `inEvent`'s
+   * @return {Object} An object containing shallow copies of `inEvent`"s
    *    properties.
    */
   cloneEvent: function(inEvent) {
@@ -255,7 +255,7 @@ var dispatcher = {
       // Work around SVGInstanceElement shadow tree
       // Return the <use> element that is represented by the instance for Safari, Chrome, IE.
       // This is the behavior implemented by Firefox.
-      if (HAS_SVG_INSTANCE && (p === 'target' || p === 'relatedTarget')) {
+      if (HAS_SVG_INSTANCE && (p === "target" || p === "relatedTarget")) {
         if (eventCopy[p] instanceof SVGElementInstance) {
           eventCopy[p] = eventCopy[p].correspondingUseElement;
         }
@@ -279,24 +279,24 @@ var dispatcher = {
       this.releaseCapture(inPointerId);
     }
     this.captureInfo[inPointerId] = inTarget;
-    var e = document.createEvent('Event');
-    e.initEvent('gotpointercapture', true, false);
+    var e = document.createEvent("Event");
+    e.initEvent("gotpointercapture", true, false);
     e.pointerId = inPointerId;
     this.implicitRelease = this.releaseCapture.bind(this, inPointerId);
-    document.addEventListener('pointerup', this.implicitRelease);
-    document.addEventListener('pointercancel', this.implicitRelease);
+    document.addEventListener("pointerup", this.implicitRelease);
+    document.addEventListener("pointercancel", this.implicitRelease);
     e._target = inTarget;
     this.asyncDispatchEvent(e);
   },
   releaseCapture: function(inPointerId) {
     var t = this.captureInfo[inPointerId];
     if (t) {
-      var e = document.createEvent('Event');
-      e.initEvent('lostpointercapture', true, false);
+      var e = document.createEvent("Event");
+      e.initEvent("lostpointercapture", true, false);
       e.pointerId = inPointerId;
       this.captureInfo[inPointerId] = undefined;
-      document.removeEventListener('pointerup', this.implicitRelease);
-      document.removeEventListener('pointercancel', this.implicitRelease);
+      document.removeEventListener("pointerup", this.implicitRelease);
+      document.removeEventListener("pointercancel", this.implicitRelease);
       e._target = t;
       this.asyncDispatchEvent(e);
     }

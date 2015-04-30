@@ -1,7 +1,7 @@
-import targeting from 'targeting';
-import dispatcher from 'dispatcher';
-import Installer from 'installer';
-import mouseEvents from 'mouse';
+import targeting from "targeting";
+import dispatcher from "dispatcher";
+import Installer from "installer";
+import mouseEvents from "mouse";
 
 var captureInfo = dispatcher.captureInfo;
 var findTarget = targeting.findTarget.bind(targeting);
@@ -11,22 +11,22 @@ var touchMap = Array.prototype.map.call.bind(Array.prototype.map);
 // This should be long enough to ignore compat mouse events made by touch
 var DEDUP_TIMEOUT = 2500;
 var CLICK_COUNT_TIMEOUT = 200;
-var ATTRIB = 'touch-action';
+var ATTRIB = "touch-action";
 var INSTALLER;
 // The presence of touch event handlers blocks scrolling, and so we must be careful to
 // avoid adding handlers unnecessarily.  Chrome plans to add a touch-action-delay property
 // (crbug.com/329559) to address this, and once we have that we can opt-in to a simpler
 // handler registration mechanism.  Rather than try to predict how exactly to opt-in to
-// that we'll just leave this disabled until there is a build of Chrome to test.
+// that we"ll just leave this disabled until there is a build of Chrome to test.
 var HAS_TOUCH_ACTION_DELAY = false;
 
 // handler block for native touch events
 var touchEvents = {
   events: [
-    'touchstart',
-    'touchmove',
-    'touchend',
-    'touchcancel'
+    "touchstart",
+    "touchmove",
+    "touchend",
+    "touchcancel"
   ],
   register: function(target) {
     if (HAS_TOUCH_ACTION_DELAY) {
@@ -81,25 +81,25 @@ var touchEvents = {
     }
   },
   scrollTypes: {
-    EMITTER: 'none',
-    XSCROLLER: 'pan-x',
-    YSCROLLER: 'pan-y',
+    EMITTER: "none",
+    XSCROLLER: "pan-x",
+    YSCROLLER: "pan-y",
     SCROLLER: /^(?:pan-x pan-y)|(?:pan-y pan-x)|auto$/
   },
   touchActionToScrollType: function(touchAction) {
     var t = touchAction;
     var st = this.scrollTypes;
-    if (t === 'none') {
-      return 'none';
+    if (t === "none") {
+      return "none";
     } else if (t === st.XSCROLLER) {
-      return 'X';
+      return "X";
     } else if (t === st.YSCROLLER) {
-      return 'Y';
+      return "Y";
     } else if (st.SCROLLER.exec(t)) {
-      return 'XY';
+      return "XY";
     }
   },
-  POINTER_TYPE: 'touch',
+  POINTER_TYPE: "touch",
   firstTouch: null,
   isPrimaryTouch: function(inTouch) {
     return this.firstTouch === inTouch.identifier;
@@ -136,7 +136,7 @@ var touchEvents = {
   },
   typeToButtons: function(type) {
     var ret = 0;
-    if (type === 'touchstart' || type === 'touchmove') {
+    if (type === "touchstart" || type === "touchmove") {
       ret = 1;
     }
     return ret;
@@ -182,19 +182,19 @@ var touchEvents = {
     if (this.firstXY) {
       var ret;
       var scrollAxis = inEvent.currentTarget._scrollType;
-      if (scrollAxis === 'none') {
+      if (scrollAxis === "none") {
         // this element is a touch-action: none, should never scroll
         ret = false;
-      } else if (scrollAxis === 'XY') {
+      } else if (scrollAxis === "XY") {
         // this element should always scroll
         ret = true;
       } else {
         var t = inEvent.changedTouches[0];
         // check the intended scroll axis, and other axis
         var a = scrollAxis;
-        var oa = scrollAxis === 'Y' ? 'X' : 'Y';
-        var da = Math.abs(t['client' + a] - this.firstXY[a]);
-        var doa = Math.abs(t['client' + oa] - this.firstXY[oa]);
+        var oa = scrollAxis === "Y" ? "X" : "Y";
+        var da = Math.abs(t["client" + a] - this.firstXY[a]);
+        var doa = Math.abs(t["client" + oa] - this.firstXY[oa]);
         // if delta in the scroll axis > delta other axis, scroll instead of
         // making events
         ret = da >= doa;
@@ -314,7 +314,7 @@ var touchEvents = {
     this.cleanUpPointer(inPointer);
   },
   cleanUpPointer: function(inPointer) {
-    pointermap['delete'](inPointer.pointerId);
+    pointermap["delete"](inPointer.pointerId);
     this.removePrimaryPointer(inPointer);
   },
   // prevent synth mouse events from creating pointer events

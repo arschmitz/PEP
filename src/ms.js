@@ -1,17 +1,17 @@
-import dispatcher from 'dispatcher';
+import dispatcher from "dispatcher";
 
 var pointermap = dispatcher.pointermap;
-var HAS_BITMAP_TYPE = window.MSPointerEvent && typeof window.MSPointerEvent.MSPOINTER_TYPE_MOUSE === 'number';
+var HAS_BITMAP_TYPE = window.MSPointerEvent && typeof window.MSPointerEvent.MSPOINTER_TYPE_MOUSE === "number";
 var msEvents = {
   events: [
-    'MSPointerDown',
-    'MSPointerMove',
-    'MSPointerUp',
-    'MSPointerOut',
-    'MSPointerOver',
-    'MSPointerCancel',
-    'MSGotPointerCapture',
-    'MSLostPointerCapture'
+    "MSPointerDown",
+    "MSPointerMove",
+    "MSPointerUp",
+    "MSPointerOut",
+    "MSPointerOver",
+    "MSPointerCancel",
+    "MSGotPointerCapture",
+    "MSLostPointerCapture"
   ],
   register: function(target) {
     dispatcher.listen(target, this.events);
@@ -20,11 +20,11 @@ var msEvents = {
     dispatcher.unlisten(target, this.events);
   },
   POINTER_TYPES: [
-    '',
-    'unavailable',
-    'touch',
-    'pen',
-    'mouse'
+    "",
+    "unavailable",
+    "touch",
+    "pen",
+    "mouse"
   ],
   prepareEvent: function(inEvent) {
     var e = inEvent;
@@ -35,7 +35,7 @@ var msEvents = {
     return e;
   },
   cleanup: function(id) {
-    pointermap['delete'](id);
+    pointermap["delete"](id);
   },
   MSPointerDown: function(inEvent) {
     pointermap.set(inEvent.pointerId, inEvent);
@@ -65,11 +65,11 @@ var msEvents = {
     this.cleanup(inEvent.pointerId);
   },
   MSLostPointerCapture: function(inEvent) {
-    var e = dispatcher.makeEvent('lostpointercapture', inEvent);
+    var e = dispatcher.makeEvent("lostpointercapture", inEvent);
     dispatcher.dispatchEvent(e);
   },
   MSGotPointerCapture: function(inEvent) {
-    var e = dispatcher.makeEvent('gotpointercapture', inEvent);
+    var e = dispatcher.makeEvent("gotpointercapture", inEvent);
     dispatcher.dispatchEvent(e);
   }
 };

@@ -13,22 +13,22 @@
  * @return {Event} A new PointerEvent of type `inType` and initialized with properties from `inDict`.
  */
 var MOUSE_PROPS = [
-  'bubbles',
-  'cancelable',
-  'view',
-  'detail',
-  'screenX',
-  'screenY',
-  'clientX',
-  'clientY',
-  'ctrlKey',
-  'altKey',
-  'shiftKey',
-  'metaKey',
-  'button',
-  'relatedTarget',
-  'pageX',
-  'pageY'
+  "bubbles",
+  "cancelable",
+  "view",
+  "detail",
+  "screenX",
+  "screenY",
+  "clientX",
+  "clientY",
+  "ctrlKey",
+  "altKey",
+  "shiftKey",
+  "metaKey",
+  "button",
+  "relatedTarget",
+  "pageX",
+  "pageY"
 ];
 
 var MOUSE_DEFAULTS = [
@@ -53,11 +53,11 @@ var MOUSE_DEFAULTS = [
 function PointerEvent(inType, inDict) {
   inDict = inDict || Object.create(null);
 
-  var e = document.createEvent('Event');
+  var e = document.createEvent("Event");
   e.initEvent(inType, inDict.bubbles || false, inDict.cancelable || false);
 
   // define inherited MouseEvent properties
-  // skip bubbles and cancelable since they're set above in initEvent()
+  // skip bubbles and cancelable since they"re set above in initEvent()
   for(var i = 2, p; i < MOUSE_PROPS.length; i++) {
     p = MOUSE_PROPS[i];
     e[p] = inDict[p] || MOUSE_DEFAULTS[i];
@@ -84,7 +84,7 @@ function PointerEvent(inType, inDict) {
   e.pressure = pressure;
   e.tiltX = inDict.tiltX || 0;
   e.tiltY = inDict.tiltY || 0;
-  e.pointerType = inDict.pointerType || '';
+  e.pointerType = inDict.pointerType || "";
   e.hwTimestamp = inDict.hwTimestamp || 0;
   e.isPrimary = inDict.isPrimary || false;
   return e;

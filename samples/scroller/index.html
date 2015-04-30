@@ -50,33 +50,33 @@
     <script>
       var size = 50;
       for (var i = 0; i < size; i++) {
-        var holder = document.createElement('div');
-        holder.classList.add('holder');
+        var holder = document.createElement("div");
+        holder.classList.add("holder");
         for (var j = 0; j < size; j++) {
-          var e = document.createElement('span');
-          e.textContent = i + ',' + j;
-          e.classList.add('inner');
+          var e = document.createElement("span");
+          e.textContent = i + "," + j;
+          e.classList.add("inner");
           holder.appendChild(e);
         }
         big.appendChild(holder);
       }
       function x() {
-        scroller.setAttribute('touch-action', 'pan-x');
+        scroller.setAttribute("touch-action", "pan-x");
       }
       function y() {
-        scroller.setAttribute('touch-action', 'pan-y');
+        scroller.setAttribute("touch-action", "pan-y");
       }
       function scroll() {
-        scroller.setAttribute('touch-action', 'auto');
+        scroller.setAttribute("touch-action", "auto");
       }
       function none() {
-        scroller.setAttribute('touch-action', 'none');
+        scroller.setAttribute("touch-action", "none");
       }
       [
-        'pointerdown',
-        'pointerup',
-        'pointermove',
-        'pointercancel'
+        "pointerdown",
+        "pointerup",
+        "pointermove",
+        "pointercancel"
       ].forEach(function(e) {
         document.addEventListener(e, function(e) {
           console.log(e.type, e.target, e.clientX, e.clientY);

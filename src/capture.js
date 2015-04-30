@@ -1,10 +1,10 @@
-import dispatcher from 'dispatcher';
+import dispatcher from "dispatcher";
 
 var n = window.navigator;
 var s, r;
 function assertDown(id) {
   if (!dispatcher.pointermap.has(id)) {
-    throw new Error('InvalidPointerId');
+    throw new Error("InvalidPointerId");
   }
 }
 if (n.msPointerEnabled) {
@@ -30,10 +30,10 @@ if (n.msPointerEnabled) {
 export function applyPolyfill() {
   if (window.Element && !Element.prototype.setPointerCapture) {
     Object.defineProperties(Element.prototype, {
-      'setPointerCapture': {
+      "setPointerCapture": {
         value: s
       },
-      'releasePointerCapture': {
+      "releasePointerCapture": {
         value: r
       }
     });

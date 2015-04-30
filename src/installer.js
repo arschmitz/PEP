@@ -5,20 +5,20 @@
  * All nodes that wish to generate Pointer Events must have the attribute
  * `touch-action` set to `none`.
  */
-import targeting from 'targeting';
+import targeting from "targeting";
 
 var forEach = Array.prototype.forEach.call.bind(Array.prototype.forEach);
 var map = Array.prototype.map.call.bind(Array.prototype.map);
 var toArray = Array.prototype.slice.call.bind(Array.prototype.slice);
 var filter = Array.prototype.filter.call.bind(Array.prototype.filter);
 var MO = window.MutationObserver || window.WebKitMutationObserver;
-var SELECTOR = '[touch-action]';
+var SELECTOR = "[touch-action]";
 var OBSERVER_INIT = {
   subtree: true,
   childList: true,
   attributes: true,
   attributeOldValue: true,
-  attributeFilter: ['touch-action']
+  attributeFilter: ["touch-action"]
 };
 
 function Installer(add, remove, changed, binder) {
@@ -45,7 +45,7 @@ Installer.prototype = {
   },
   enableOnSubtree: function(target) {
     this.watchSubtree(target);
-    if (target === document && document.readyState !== 'complete') {
+    if (target === document && document.readyState !== "complete") {
       this.installOnLoad();
     } else {
       this.installNewSubtree(target);
@@ -74,8 +74,8 @@ Installer.prototype = {
   },
   // register all touch-action = none nodes on document load
   installOnLoad: function() {
-    document.addEventListener('readystatechange', function() {
-      if (document.readyState === 'complete') {
+    document.addEventListener("readystatechange", function() {
+      if (document.readyState === "complete") {
         this.installNewSubtree(document);
       }
     }.bind(this));
@@ -95,12 +95,12 @@ Installer.prototype = {
     mutations.forEach(this.mutationHandler, this);
   },
   mutationHandler: function(m) {
-    if (m.type === 'childList') {
+    if (m.type === "childList") {
       var added = this.flattenMutationTree(m.addedNodes);
       added.forEach(this.addElement, this);
       var removed = this.flattenMutationTree(m.removedNodes);
       removed.forEach(this.removeElement, this);
-    } else if (m.type === 'attributes') {
+    } else if (m.type === "attributes") {
       this.elementChanged(m.target, m.oldValue);
     }
   }
@@ -108,7 +108,7 @@ Installer.prototype = {
 
 if (!MO) {
   Installer.prototype.watchSubtree = function(){
-    console.warn('PointerEventsPolyfill: MutationObservers not found, touch-action will not be dynamically detected');
+    console.warn("PointerEventsPolyfill: MutationObservers not found, touch-action will not be dynamically detected");
   };
 }
 

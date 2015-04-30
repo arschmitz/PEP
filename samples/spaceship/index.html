@@ -20,7 +20,7 @@ https://github.com/borismus/pointer.js.
         -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
         /* make transparent link selection, adjust last value opacity 0 to 1.0 */
         -webkit-tap-highlight-color: rgba(0,0,0,0); 
-        -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+        -webkit-user-select: none; /* prevent copy paste, to allow, change "none" to "text" */
         -webkit-tap-highlight-color: rgba(0,0,0,0); 
       }
 
@@ -60,7 +60,7 @@ window.requestAnimFrame = (function(){
 })();
 
 var canvas,
-c, // c is the canvas' context 2D
+c, // c is the canvas" context 2D
 container, 
 halfWidth, 
 halfHeight,
@@ -84,9 +84,9 @@ document.body.appendChild(ship.canvas);
 requestAnimFrame(draw);
 
 
-canvas.addEventListener( 'pointerdown', onPointerDown, false );
-canvas.addEventListener( 'pointermove', onPointerMove, false );
-canvas.addEventListener( 'pointerup', onPointerUp, false );
+canvas.addEventListener( "pointerdown", onPointerDown, false );
+canvas.addEventListener( "pointermove", onPointerMove, false );
+canvas.addEventListener( "pointerup", onPointerUp, false );
 window.onorientationchange = resetCanvas;  
 window.onresize = resetCanvas;  
 
@@ -248,7 +248,7 @@ function onPointerUp(e) {
 
   if (length == 0) {
     leftPointerID = -1; 
-    if (e.pointerType == 'touch') {
+    if (e.pointerType == "touch") {
       leftVector.reset(0,0); 
     }
   }
@@ -257,10 +257,10 @@ function onPointerUp(e) {
 
 function setupCanvas() {
 
-  canvas = document.createElement( 'canvas' );
-  canvas.setAttribute( 'touch-action', 'none' );
-  c = canvas.getContext( '2d' );
-  container = document.createElement( 'div' );
+  canvas = document.createElement( "canvas" );
+  canvas.setAttribute( "touch-action", "none" );
+  c = canvas.getContext( "2d" );
+  container = document.createElement( "div" );
   container.className = "container";
 
   document.body.appendChild( container );

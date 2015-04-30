@@ -16,7 +16,7 @@ export default {
   olderShadow: function(shadow) {
     var os = shadow.olderShadowRoot;
     if (!os) {
-      var se = shadow.querySelector('shadow');
+      var se = shadow.querySelector("shadow");
       if (se) {
         os = se.olderShadowRoot;
       }

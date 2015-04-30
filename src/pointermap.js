@@ -27,7 +27,7 @@ PointerMap.prototype = {
   has: function(inId) {
     return this.keys.indexOf(inId) > -1;
   },
-  'delete': function(inId) {
+  "delete": function(inId) {
     var i = this.keys.indexOf(inId);
     if (i > -1) {
       this.keys.splice(i, 1);

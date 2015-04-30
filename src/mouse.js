@@ -1,4 +1,4 @@
-import dispatcher from 'dispatcher';
+import dispatcher from "dispatcher";
 
 var pointermap = dispatcher.pointermap;
 // radius around touchend that swallows mouse events
@@ -8,19 +8,19 @@ var WHICH_TO_BUTTONS = [0, 1, 4, 2];
 
 var HAS_BUTTONS = false;
 try {
-  HAS_BUTTONS = new MouseEvent('test', {buttons: 1}).buttons === 1;
+  HAS_BUTTONS = new MouseEvent("test", {buttons: 1}).buttons === 1;
 } catch (e) {}
 
 // handler block for native mouse events
 var mouseEvents = {
   POINTER_ID: 1,
-  POINTER_TYPE: 'mouse',
+  POINTER_TYPE: "mouse",
   events: [
-    'mousedown',
-    'mousemove',
-    'mouseup',
-    'mouseover',
-    'mouseout'
+    "mousedown",
+    "mousemove",
+    "mouseup",
+    "mouseover",
+    "mouseout"
   ],
   register: function(target) {
     dispatcher.listen(target, this.events);
@@ -104,7 +104,7 @@ var mouseEvents = {
     this.cleanupMouse();
   },
   cleanupMouse: function() {
-    pointermap['delete'](this.POINTER_ID);
+    pointermap["delete"](this.POINTER_ID);
   }
 };
 

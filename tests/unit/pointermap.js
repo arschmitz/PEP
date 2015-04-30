@@ -1,29 +1,29 @@
 define([
-  '../support/tdd',
-  'intern/chai!expect',
-  'pep'
+  "../support/tdd",
+  "intern/chai!expect",
+  "pep"
 ], function (tdd, expect, pep) {
   var suite = tdd.suite;
   var test = tdd.test;
 
-  suite('PointerMap', function() {
+  suite("PointerMap", function() {
     var PointerMap = pep.PointerMap;
-    test('PointerMap has Map API', function() {
+    test("PointerMap has Map API", function() {
       var keys = [
-        'set',
-        'get',
-        'has',
-        'delete',
-        'pointers',
-        'clear',
-        'forEach'
+        "set",
+        "get",
+        "has",
+        "delete",
+        "pointers",
+        "clear",
+        "forEach"
       ];
       var e = expect(PointerMap.prototype);
       keys.forEach(function(k) {
         e.to.have.ownProperty(k);
       });
     });
-    test('PointerMap .set', function() {
+    test("PointerMap .set", function() {
       var p = new PointerMap();
       p.set(1, true);
       if (!window.Map || !(p instanceof Map)) {
@@ -32,25 +32,25 @@ define([
       }
       expect(p.pointers()).to.equal(1);
     });
-    test('PointerMap .get', function() {
+    test("PointerMap .get", function() {
       var p = new PointerMap();
     });
-    test('PointerMap .pointers', function() {
+    test("PointerMap .pointers", function() {
       var p = new PointerMap();
-      expect(p.pointers).to.be.a('function');
+      expect(p.pointers).to.be.a("function");
       expect(p.pointers()).to.equal(0);
       p.set(1, true);
       expect(p.pointers()).to.equal(1);
       p.set(1, false);
       expect(p.pointers()).to.equal(1);
     });
-    test('PointerMap .has', function() {
+    test("PointerMap .has", function() {
       var p = new PointerMap();
       p.set(1, true);
       expect(p.has(1)).to.equal(true);
       expect(p.has(0)).to.equal(false);
     });
-    test('PointerMap .delete', function() {
+    test("PointerMap .delete", function() {
       var p = new PointerMap();
       p.set(1, true);
       p.set(2, false);
@@ -59,13 +59,13 @@ define([
       expect(p.pointers()).to.equal(1);
       expect(p.get(2)).to.equal(false);
     });
-    test('PointerMap .clear', function() {
+    test("PointerMap .clear", function() {
       var p = new PointerMap();
       p.set(1, true);
       p.clear();
       expect(p.pointers()).to.equal(0);
     });
-    test('PointerMap .forEach', function() {
+    test("PointerMap .forEach", function() {
       var p = new PointerMap();
       p.set(1, true);
       p.set(2, false);

@@ -38,23 +38,23 @@ var Paint = function(options) {
 
 Paint.prototype.initEvents = function() {
   var canvas = this.canvas;
-  canvas.addEventListener('pointerdown', this.onPointerDown.bind(this));
-  canvas.addEventListener('pointermove', this.onPointerMove.bind(this));
-  canvas.addEventListener('pointerup', this.onPointerUp.bind(this));
-  canvas.addEventListener('pointercancel', this.onPointerUp.bind(this));
+  canvas.addEventListener("pointerdown", this.onPointerDown.bind(this));
+  canvas.addEventListener("pointermove", this.onPointerMove.bind(this));
+  canvas.addEventListener("pointerup", this.onPointerUp.bind(this));
+  canvas.addEventListener("pointercancel", this.onPointerUp.bind(this));
 };
 
 Paint.prototype.onPointerDown = function(event) {
-  var width = event.pointerType === 'touch' ? (event.width || 10) : 4;
+  var width = event.pointerType === "touch" ? (event.width || 10) : 4;
   this.pointers[event.pointerId] = new Pointer({x: event.clientX, y: event.clientY, width: width});
 };
 
 Paint.prototype.onPointerMove = function(event) {
   var pointer = this.pointers[event.pointerId];
-  // Check if there's a pointer that's down.
+  // Check if there"s a pointer that"s down.
   if (pointer) {
     pointer.setTarget({x: event.clientX, y: event.clientY});
-    //console.log('pointers', pointer);
+    //console.log("pointers", pointer);
   }
 };
 
@@ -67,7 +67,7 @@ Paint.prototype.renderLoop = function(lastRender) {
   for (var pointerId in this.pointers) {
     var pointer = this.pointers[pointerId];
     if (pointer.isDelta()) {
-      //console.log('rendering', pointer.targetX);
+      //console.log("rendering", pointer.targetX);
       var ctx = this.ctx;
       ctx.lineWidth = pointer.width;
       ctx.strokeStyle = pointer.color;
